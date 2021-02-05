@@ -3,7 +3,7 @@ import argparse
 import fileinput
 
 
-class InitializeProgram:
+class ValidateTrannsactions:
     """
     Class that initialize application.
     App can be starting with [-i, --input] parameters

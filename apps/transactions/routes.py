@@ -2,6 +2,7 @@ from flask import Blueprint, current_app, request
 from marshmallow import ValidationError
 from .model import Transactions
 from .api.serializer import TransactionsSerializer
+from sqlalchemy import desc
 
 bp_transaction = Blueprint('transaction', __name__, url_prefix='/transaction')
 
@@ -18,6 +19,17 @@ def show(id: str):
         res = Transactions.query.filter_by(id=id).first()
         if res == {}:
             res = {'message': f'User with id "{id}" returns a empty query!'}
+    except Exception as e:
+        return {"message": f"Error on read Database:\n    {e}\n    data: {res}"}
+    return bs.jsonify(res), 200
+
+
+@bp_transaction.route('/customer_last/<int:id>', methods=['GET'])
+def customer_last(id: str):
+    bs = TransactionsSerializer()
+    try:
+        res = Transactions.query.filter_by(customer_id=id)\
+            .order_by(desc(Transactions.time)).first()
     except Exception as e:
         return {"message": f"Error on read Database:\n    {e}\n    data: {res}"}
     return bs.jsonify(res), 200

@@ -44,8 +44,6 @@ def create_app():
     app.register_blueprint(bp_profile)          # Register blueprint route from Profiles
     app.register_blueprint(bp_transaction)      # Register blueprint route from Transactions
 
-    # valid_stdin = ValidateParameteres().validate_stdin()   # Process data sending via stdin or argv parameters
-
     return app
 
 
@@ -53,4 +51,3 @@ if __name__ == '__main__':
     app = create_app()
     app.run()
     # create_api()  # Initialize Flask Rest Full module
-    # valid_stdin = ValidateParameteres().validate_stdin()   # Process data sending via stdin or argv parameters

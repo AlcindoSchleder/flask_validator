@@ -10,14 +10,21 @@
     Download the system from the git repository and compile the docker or install on the machine
      containing python installed using the commands below.
 
-### Instalação:
+### Install:
+You must choose from type of instalation as:
+#### Production
     Python Version: 3.7.9
-
     python3 -v venv venv
+    pip install -r requirements.txt
     gunicorn --bind 0.0.0.0:56733 --worker-class eventlet -w 1 app:app
 
+#### Development
+    Python Version: 3.7.9
+    python3 -v venv venv
+    pip install -r ./development.txt
+    ./app.py
 
-### Docker
+#### Docker
     1. Compile and Run Docker
     ./create_docker.sh
 

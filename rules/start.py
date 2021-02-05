@@ -1,9 +1,10 @@
 import sys
 import argparse
 import fileinput
+from rules.business import BusinessValidation
 
 
-class ValidateTrannsactions:
+class ValidateTransactions:
     """
     Class that initialize application.
     App can be starting with [-i, --input] parameters
@@ -79,10 +80,13 @@ class ValidateTrannsactions:
         else:
             return False
         while True:
+            lin = 0
             try:
                 line = next(gen)
+                lin += 1
                 # implement transaction operations here
-                print(f'File Data: {line}')
+                validate = BusinessValidation(line)
+                print(f'File Data validation of line {lin}: {validate.validate()}')
             except StopIteration:
                 break
         if gen is not None:

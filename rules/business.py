@@ -15,12 +15,13 @@ class BusinessValidation:
 
     def __init__(self, transaction):
         self._ts = TransactionsSerializer()
+        self._transaction = transaction
 
-    def _valitate_json(self):
+    def _validate_json(self):
         try:
-            if type(self.transaction) == str:
-                self.transaction = json.loads(self.transaction)
-            self._ts.load(self.transaction)
+            if type(self._transaction) == str:
+                self._transaction = json.loads(self._transaction)
+            self._ts.load(self._transaction)
         except Exception as e:
             print(f'Error on load transaction. This is not a valid json '
                    f'trasaction.\n Error: {e}')
@@ -80,12 +81,11 @@ class BusinessValidation:
                 res = False
         return res
 
-    def validate(self, data):
-        self._transaction = data
-        if self._valitate_json():
+    def validate(self):
+        if self._validate_json():
             self._rule_revenue()
             self._rule_score()
             self._last_transaction()
-            if self.valid_msg == []:
+            if not self.valid_msg:
                 post(f'{self._HOST}/transactions/insert', data=self._transaction)
         return self.valid_msg

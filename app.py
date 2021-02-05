@@ -1,8 +1,8 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import os
 from flask import Flask
 from flask_migrate import Migrate
-from rules.start import InitializeProgram
 from rules.configure_app import configure_database, configure_serializers, config_by_name
 
 
@@ -50,4 +50,3 @@ def create_app():
 if __name__ == '__main__':
     app = create_app()
     app.run()
-    # create_api()  # Initialize Flask Rest Full module

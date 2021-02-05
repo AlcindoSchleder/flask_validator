@@ -86,4 +86,6 @@ class BusinessValidation:
             self._rule_revenue()
             self._rule_score()
             self._last_transaction()
+            if self.valid_msg == []:
+                post(f'{self._HOST}/transactions/insert', data=self._transaction)
         return self.valid_msg
